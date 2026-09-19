@@ -1,0 +1,208 @@
+<title>Undersong Privacy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root{
+    --ink:#121A16;
+    --ink-soft:#43514A;
+    --muted:#77857D;
+    --paper:#F2EFE8;
+    --surface:#FBF9F5;
+    --rule:rgba(18,26,22,.14);
+    --rule-soft:rgba(18,26,22,.07);
+    --accent:#2C4A3B;
+    --serif:"Spectral",Iowan Old Style,Palatino,Georgia,serif;
+    --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#E6E9E4; --ink-soft:#AEB8B1; --muted:#7F8B84;
+      --paper:#0E1512; --surface:#151E19;
+      --rule:rgba(230,233,228,.16); --rule-soft:rgba(230,233,228,.08);
+      --accent:#9CC0AC;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#E6E9E4; --ink-soft:#AEB8B1; --muted:#7F8B84;
+    --paper:#0E1512; --surface:#151E19;
+    --rule:rgba(230,233,228,.16); --rule-soft:rgba(230,233,228,.08);
+    --accent:#9CC0AC;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:660px; margin:0 auto; padding-inline:20px; padding-block:clamp(40px,8vw,84px)}
+
+  header.mast{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    padding-bottom:18px; border-bottom:1px solid var(--rule)}
+  .wordmark{font-family:var(--sans); font-size:12px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--ink); font-weight:600}
+  .wordmark span{color:var(--muted); letter-spacing:.1em; margin-left:.7em; font-weight:400}
+
+  .langs{display:flex; gap:2px; font-size:12px}
+  .langs button{
+    font:inherit; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    background:none; border:1px solid transparent; color:var(--muted);
+    padding:5px 11px; border-radius:999px; cursor:pointer; transition:color .15s,border-color .15s;
+  }
+  .langs button[aria-pressed="true"]{color:var(--ink); border-color:var(--rule)}
+  .langs button:hover{color:var(--ink)}
+  .langs button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  h1{font-family:var(--serif); font-weight:400; font-size:clamp(30px,6.4vw,42px); line-height:1.15;
+    margin:38px 0 0; text-wrap:balance; letter-spacing:-.01em}
+
+  .thesis{font-family:var(--serif); font-size:clamp(19px,3.4vw,23px); line-height:1.5; font-style:italic;
+    color:var(--ink-soft); margin:22px 0 0; text-wrap:pretty}
+
+  .meta{margin-top:30px; padding:14px 18px; background:var(--surface);
+    border:1px solid var(--rule-soft); border-left:2px solid var(--accent);
+    font-size:13.5px; color:var(--ink-soft); display:grid; gap:4px}
+  .meta b{color:var(--ink); font-weight:600}
+  .todo{background:rgba(196,138,44,.14); color:var(--ink); border-radius:3px; padding:1px 7px;
+    font-size:12.5px; font-weight:600; letter-spacing:.02em; white-space:nowrap}
+
+  h2{font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); margin:46px 0 0; padding-bottom:9px; border-bottom:1px solid var(--rule-soft)}
+  h2 + p, h2 + ul{margin-top:16px}
+  p{margin:16px 0 0; color:var(--ink-soft)}
+  p strong{color:var(--ink); font-weight:600}
+
+  ul{margin:16px 0 0; padding:0; list-style:none; display:grid; gap:11px}
+  li{position:relative; padding-left:20px; color:var(--ink-soft)}
+  li::before{content:""; position:absolute; left:2px; top:.72em; width:6px; height:1px; background:var(--muted)}
+
+  a{color:var(--ink); text-decoration:underline; text-decoration-color:var(--rule); text-underline-offset:3px}
+  a:hover{text-decoration-color:var(--accent)}
+  a:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:2px}
+
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--rule);
+    font-size:13px; color:var(--muted)}
+
+  [lang]:not(.on){display:none}
+  :lang(zh) h1, :lang(zh) .thesis{letter-spacing:0}
+  .zh h1{font-family:var(--serif),"Songti SC","Noto Serif CJK SC",serif}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="wordmark">Undersong <span>夜泊</span></div>
+    <nav class="langs" aria-label="Language">
+      <button id="btn-en" type="button" aria-pressed="true">English</button>
+      <button id="btn-zh" type="button" aria-pressed="false">中文</button>
+    </nav>
+  </header>
+
+  <!-- ENGLISH -->
+  <main id="doc-en" lang="en" class="on">
+    <h1>Privacy Policy</h1>
+    <p class="thesis">Undersong has no servers, no accounts, and makes no network requests of its own. There is nothing for us to collect, and no way for us to collect it.</p>
+
+    <div class="meta">
+      <div>Effective date: <b>19 September 2026</b></div>
+      <div>Applies to: <b>Undersong</b> for iPhone and iPad</div>
+    </div>
+
+    <h2>What we collect</h2>
+    <p><strong>Nothing.</strong></p>
+    <p>Undersong contains no analytics, no crash reporting, no advertising identifiers, and no third-party SDKs of any kind. It does not request access to your location, contacts, microphone, camera, photos, or health data. Every sound you hear is generated on your device as it plays — nothing is streamed and nothing is fetched.</p>
+
+    <h2>What stays on your device</h2>
+    <p>The app stores a small amount of information locally, on your device only. It is never transmitted anywhere, and we have no way to see it:</p>
+    <ul>
+      <li>Which sound was drawn for a given night, and your sleep timer setting</li>
+      <li>Whether you have an active subscription or a lifetime purchase</li>
+      <li>App preferences, such as language</li>
+    </ul>
+    <p>Deleting the app removes all of it.</p>
+
+    <h2>Purchases</h2>
+    <p>Subscriptions and the lifetime purchase are processed entirely by Apple through the App Store. We never see or receive your payment details, your Apple Account, or your name. At no point do we receive personal information from Apple — only a signed receipt, held on your own device, confirming that a purchase is valid.</p>
+    <p>Apple's handling of that transaction is governed by <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a>.</p>
+
+    <h2>Children</h2>
+    <p>Undersong is not directed at children, and collects no information from anyone — children included.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the revised version will be posted at this address with a new effective date. Because the app collects nothing, we do not anticipate material changes.</p>
+
+    <h2>Contact</h2>
+    <p><a href="mailto:sgbusiness046@gmail.com">sgbusiness046@gmail.com</a></p>
+  </main>
+
+  <!-- 中文 -->
+  <main id="doc-zh" lang="zh-Hans" class="zh">
+    <h1>隐私政策</h1>
+    <p class="thesis">夜泊没有服务器、没有账号，自身不发起任何网络请求。我们没有东西可收集，也没有办法收集。</p>
+
+    <div class="meta">
+      <div>生效日期：<b>2026 年 9 月 19 日</b></div>
+      <div>适用于：<b>夜泊</b> iPhone 与 iPad 版</div>
+    </div>
+
+    <h2>我们收集什么</h2>
+    <p><strong>什么都不收集。</strong></p>
+    <p>夜泊不含任何分析工具、崩溃上报、广告标识符或第三方 SDK。它不会请求你的位置、通讯录、麦克风、相机、照片或健康数据。你听到的每一段声音都是在你的设备上实时生成的——不流式传输，也不下载。</p>
+
+    <h2>哪些信息留在你的设备上</h2>
+    <p>App 会在你的设备本地保存少量信息。它们不会被传输到任何地方，我们也无从查看：</p>
+    <ul>
+      <li>某一晚抽到的是哪个声音，以及你的定时设置</li>
+      <li>你是否拥有有效的订阅或买断</li>
+      <li>语言等偏好设置</li>
+    </ul>
+    <p>删除 App 即全部清除。</p>
+
+    <h2>关于购买</h2>
+    <p>订阅与买断完全由 Apple 通过 App Store 处理。我们不会看到也不会收到你的支付信息、Apple 账户或姓名。我们在任何环节都不会从 Apple 处获得你的个人信息——只有一张留在你自己设备上的签名凭证，用于确认购买有效。</p>
+    <p>Apple 对该交易的处理适用 <a href="https://www.apple.com/legal/privacy/">Apple 自己的隐私政策</a>。</p>
+
+    <h2>关于儿童</h2>
+    <p>夜泊并非面向儿童设计，且不收集任何人的信息，儿童亦然。</p>
+
+    <h2>政策变更</h2>
+    <p>若本政策发生变更，新版本将发布于本页面并标注新的生效日期。由于 App 不收集任何信息，我们预计不会有实质性变更。</p>
+
+    <h2>联系方式</h2>
+    <p><a href="mailto:sgbusiness046@gmail.com">sgbusiness046@gmail.com</a></p>
+  </main>
+
+  <footer id="foot">Undersong · 夜泊</footer>
+</div>
+
+<script>
+  (function () {
+    var docs = { en: document.getElementById('doc-en'), zh: document.getElementById('doc-zh') };
+    var btns = { en: document.getElementById('btn-en'), zh: document.getElementById('btn-zh') };
+    var foot = document.getElementById('foot');
+
+    function set(lang) {
+      Object.keys(docs).forEach(function (k) {
+        docs[k].classList.toggle('on', k === lang);
+        btns[k].setAttribute('aria-pressed', String(k === lang));
+      });
+      document.documentElement.lang = (lang === 'zh') ? 'zh-Hans' : 'en';
+      foot.textContent = (lang === 'zh')
+        ? 'Undersong · 夜泊 — 端上实时合成，不上传任何数据'
+        : 'Undersong · 夜泊 — synthesised on your device, nothing uploaded';
+      try { localStorage.setItem('undersong-privacy-lang', lang); } catch (e) {}
+    }
+
+    Object.keys(btns).forEach(function (k) {
+      btns[k].addEventListener('click', function () { set(k); });
+    });
+
+    var start = 'en';
+    try {
+      var saved = localStorage.getItem('undersong-privacy-lang');
+      if (saved === 'en' || saved === 'zh') start = saved;
+      else if ((navigator.language || '').toLowerCase().indexOf('zh') === 0) start = 'zh';
+    } catch (e) {
+      if ((navigator.language || '').toLowerCase().indexOf('zh') === 0) start = 'zh';
+    }
+    set(start);
+  })();
+</script>
