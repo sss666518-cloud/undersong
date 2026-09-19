@@ -1,0 +1,194 @@
+<title>Undersong Support</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root{
+    --ink:#121A16;
+    --ink-soft:#43514A;
+    --muted:#77857D;
+    --paper:#F2EFE8;
+    --surface:#FBF9F5;
+    --rule:rgba(18,26,22,.14);
+    --rule-soft:rgba(18,26,22,.07);
+    --accent:#2C4A3B;
+    --serif:"Spectral",Iowan Old Style,Palatino,Georgia,serif;
+    --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#E6E9E4; --ink-soft:#AEB8B1; --muted:#7F8B84;
+      --paper:#0E1512; --surface:#151E19;
+      --rule:rgba(230,233,228,.16); --rule-soft:rgba(230,233,228,.08);
+      --accent:#9CC0AC;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#E6E9E4; --ink-soft:#AEB8B1; --muted:#7F8B84;
+    --paper:#0E1512; --surface:#151E19;
+    --rule:rgba(230,233,228,.16); --rule-soft:rgba(230,233,228,.08);
+    --accent:#9CC0AC;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:660px; margin:0 auto; padding-inline:20px; padding-block:clamp(40px,8vw,84px)}
+
+  header.mast{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    padding-bottom:18px; border-bottom:1px solid var(--rule)}
+  .wordmark{font-family:var(--sans); font-size:12px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--ink); font-weight:600}
+  .wordmark span{color:var(--muted); letter-spacing:.1em; margin-left:.7em; font-weight:400}
+
+  .langs{display:flex; gap:2px; font-size:12px}
+  .langs button{
+    font:inherit; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    background:none; border:1px solid transparent; color:var(--muted);
+    padding:5px 11px; border-radius:999px; cursor:pointer; transition:color .15s,border-color .15s;
+  }
+  .langs button[aria-pressed="true"]{color:var(--ink); border-color:var(--rule)}
+  .langs button:hover{color:var(--ink)}
+  .langs button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  h1{font-family:var(--serif); font-weight:400; font-size:clamp(30px,6.4vw,42px); line-height:1.15;
+    margin:38px 0 0; text-wrap:balance; letter-spacing:-.01em}
+
+  .thesis{font-family:var(--serif); font-size:clamp(19px,3.4vw,23px); line-height:1.5; font-style:italic;
+    color:var(--ink-soft); margin:22px 0 0; text-wrap:pretty}
+
+  .meta{margin-top:30px; padding:14px 18px; background:var(--surface);
+    border:1px solid var(--rule-soft); border-left:2px solid var(--accent);
+    font-size:13.5px; color:var(--ink-soft); display:grid; gap:4px}
+  .meta b{color:var(--ink); font-weight:600}
+  .todo{background:rgba(196,138,44,.14); color:var(--ink); border-radius:3px; padding:1px 7px;
+    font-size:12.5px; font-weight:600; letter-spacing:.02em; white-space:nowrap}
+
+  h2{font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); margin:46px 0 0; padding-bottom:9px; border-bottom:1px solid var(--rule-soft)}
+  h2 + p, h2 + ul{margin-top:16px}
+  p{margin:16px 0 0; color:var(--ink-soft)}
+  p strong{color:var(--ink); font-weight:600}
+
+  ul{margin:16px 0 0; padding:0; list-style:none; display:grid; gap:11px}
+  li{position:relative; padding-left:20px; color:var(--ink-soft)}
+  li::before{content:""; position:absolute; left:2px; top:.72em; width:6px; height:1px; background:var(--muted)}
+
+  a{color:var(--ink); text-decoration:underline; text-decoration-color:var(--rule); text-underline-offset:3px}
+  a:hover{text-decoration-color:var(--accent)}
+  a:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:2px}
+
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--rule);
+    font-size:13px; color:var(--muted)}
+
+  [lang]:not(.on){display:none}
+  :lang(zh) h1, :lang(zh) .thesis{letter-spacing:0}
+  .zh h1{font-family:var(--serif),"Songti SC","Noto Serif CJK SC",serif}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="wordmark">Undersong <span>夜泊</span></div>
+    <nav class="langs" aria-label="Language">
+      <button id="btn-en" type="button" aria-pressed="true">English</button>
+      <button id="btn-zh" type="button" aria-pressed="false">中文</button>
+    </nav>
+  </header>
+
+  <main id="doc-en" lang="en" class="on">
+    <h1>Support</h1>
+    <p class="thesis">Undersong deals one sound a night. Here is how that works, and how to reach a person when it doesn't.</p>
+
+    <div class="meta">
+      <div>Email: <b><a href="mailto:sgbusiness046@gmail.com">sgbusiness046@gmail.com</a></b></div>
+      <div>We usually reply within two business days.</div>
+    </div>
+
+    <h2>How it works</h2>
+    <p><strong>Why do I only get one sound a night?</strong><br>Because choosing is the part that keeps you awake. Undersong deals you a card each evening and plays what's on it. You can change it once per night if the draw really doesn't suit you.</p>
+    <p><strong>Does it repeat?</strong><br>No. The sounds aren't recordings — they're generated on your device as they play, from a new random seed each night. Two nights of rain are never the same rain.</p>
+    <p><strong>Does it work offline, or in Airplane Mode?</strong><br>Yes, entirely. Nothing is streamed or downloaded. The app makes no network requests of its own.</p>
+    <p><strong>Does it keep playing when the screen is off?</strong><br>Yes. Playback continues in the background and appears on your Lock Screen, where you can pause it without unlocking.</p>
+    <p><strong>Can I set how long it plays?</strong><br>Yes — pick a sleep timer, and the sound fades out rather than stopping abruptly.</p>
+    <p><strong>There's no volume slider.</strong><br>That's deliberate. Use your phone's own volume buttons, so the app never fights your system volume in the dark.</p>
+
+    <h2>Subscriptions and purchases</h2>
+    <p><strong>What does Pro give me?</strong><br>The free version deals from six sounds, one per suit. Pro deals from all twenty-four, so the nights repeat far less often.</p>
+    <p><strong>I paid but the app still says Free.</strong><br>Open the Pro page and tap <em>Restore Purchases</em>. Make sure you're signed in with the same Apple Account you bought with. If it still doesn't restore, email us with the date of purchase and we'll help.</p>
+    <p><strong>How do I cancel, or manage my subscription?</strong><br>Subscriptions are handled by Apple, not by us: open the Settings app, tap your name, then <em>Subscriptions</em>. Or go straight to <a href="https://apps.apple.com/account/subscriptions">apps.apple.com/account/subscriptions</a>.</p>
+    <p><strong>Refunds.</strong><br>All purchases go through the App Store, so refunds are requested from Apple at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>. We can't issue them ourselves, but write to us if something went wrong — we'd rather know.</p>
+
+    <h2>Something's broken</h2>
+    <p>Email <a href="mailto:sgbusiness046@gmail.com">sgbusiness046@gmail.com</a> and include your device model, your iOS version, and what you were doing when it happened. If it's an audio problem, the sound's name and the time of night help a lot.</p>
+
+    <h2>Privacy</h2>
+    <p>Undersong collects nothing at all. The full policy is on the <a href="privacy.html">privacy page</a>.</p>
+  </main>
+
+  <main id="doc-zh" lang="zh-Hans" class="zh">
+    <h1>技术支持</h1>
+    <p class="thesis">夜泊每晚只发一张牌。这里说明它是怎么运作的，以及出问题时怎么找到人。</p>
+
+    <div class="meta">
+      <div>邮箱：<b><a href="mailto:sgbusiness046@gmail.com">sgbusiness046@gmail.com</a></b></div>
+      <div>通常两个工作日内回复。</div>
+    </div>
+
+    <h2>它是怎么用的</h2>
+    <p><strong>为什么每晚只有一个声音？</strong><br>因为挑选本身就是让人睡不着的那一步。夜泊每天傍晚发一张牌，播牌面上的那个。如果实在不合适，每晚可以换一次。</p>
+    <p><strong>会重复吗？</strong><br>不会。这些声音不是录音，而是在你的设备上实时生成的，每晚换一组新的随机种子。两晚的雨不会是同一场雨。</p>
+    <p><strong>没有网络、开飞行模式能用吗？</strong><br>完全可以。不流式传输、不下载，App 自身不发起任何网络请求。</p>
+    <p><strong>息屏之后还会继续播吗？</strong><br>会。后台继续播放，锁屏上有控件，不解锁也能暂停。</p>
+    <p><strong>可以设定播多久吗？</strong><br>可以，选一个定时，时间到了是淡出，不是突然掐断。</p>
+    <p><strong>为什么没有音量条？</strong><br>这是故意的。请用手机自己的音量键，这样在黑暗里 App 不会和系统音量打架。</p>
+
+    <h2>订阅与购买</h2>
+    <p><strong>Pro 给我什么？</strong><br>免费版从 6 个声音里发牌，每个花色一个。Pro 从全部 24 个里发，重复的间隔长得多。</p>
+    <p><strong>我付过款，但 App 还显示免费版。</strong><br>打开 Pro 页面，点<em>恢复购买</em>。确认你登录的是当初购买时用的那个 Apple 账户。如果仍然恢复不了，把购买日期发邮件给我们，我们来处理。</p>
+    <p><strong>怎么取消或管理订阅？</strong><br>订阅由 Apple 管理，不在我们这里：打开「设置」App，点你的名字，再点<em>订阅</em>。或者直接访问 <a href="https://apps.apple.com/account/subscriptions">apps.apple.com/account/subscriptions</a>。</p>
+    <p><strong>退款</strong><br>所有购买都通过 App Store，退款要向 Apple 申请：<a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>。我们没有权限直接退款，但如果出了问题还是写信告诉我们，我们希望知道。</p>
+
+    <h2>出问题了</h2>
+    <p>发邮件到 <a href="mailto:sgbusiness046@gmail.com">sgbusiness046@gmail.com</a>，写清你的设备型号、iOS 版本，以及出问题时你在做什么。如果是声音的问题，告诉我们声音的名字和大概几点发生的，会很有帮助。</p>
+
+    <h2>隐私</h2>
+    <p>夜泊不收集任何信息。完整政策见<a href="privacy.html">隐私政策页</a>。</p>
+  </main>
+
+  <footer id="foot">Undersong · 夜泊</footer>
+</div>
+
+<script>
+  (function () {
+    var docs = { en: document.getElementById('doc-en'), zh: document.getElementById('doc-zh') };
+    var btns = { en: document.getElementById('btn-en'), zh: document.getElementById('btn-zh') };
+    var foot = document.getElementById('foot');
+
+    function set(lang) {
+      Object.keys(docs).forEach(function (k) {
+        docs[k].classList.toggle('on', k === lang);
+        btns[k].setAttribute('aria-pressed', String(k === lang));
+      });
+      document.documentElement.lang = (lang === 'zh') ? 'zh-Hans' : 'en';
+      foot.textContent = (lang === 'zh')
+        ? 'Undersong · 夜泊 — 端上实时合成，不上传任何数据'
+        : 'Undersong · 夜泊 — synthesised on your device, nothing uploaded';
+      try { localStorage.setItem('undersong-privacy-lang', lang); } catch (e) {}
+    }
+
+    Object.keys(btns).forEach(function (k) {
+      btns[k].addEventListener('click', function () { set(k); });
+    });
+
+    var start = 'en';
+    try {
+      var saved = localStorage.getItem('undersong-privacy-lang');
+      if (saved === 'en' || saved === 'zh') start = saved;
+      else if ((navigator.language || '').toLowerCase().indexOf('zh') === 0) start = 'zh';
+    } catch (e) {
+      if ((navigator.language || '').toLowerCase().indexOf('zh') === 0) start = 'zh';
+    }
+    set(start);
+  })();
+</script>
